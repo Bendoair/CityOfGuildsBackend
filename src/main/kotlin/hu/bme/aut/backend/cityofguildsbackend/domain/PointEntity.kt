@@ -7,7 +7,7 @@ import java.time.LocalDateTime
 @Entity
 data class PointEntity(
     @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
+    @GeneratedValue(strategy= GenerationType.UUID)
     @Column(name="id")
     val id: String = "",
 

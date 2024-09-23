@@ -11,8 +11,8 @@ class UserService(
     private val userRepository: IUserRepository,
 ): IUserService {
     override fun save(user: UserEntity): UserEntity {
-        val saved = userRepository.save(user)
-        return saved
+        return userRepository.save(user)
+
     }
 
     override fun getUserById(id: String): UserEntity? {

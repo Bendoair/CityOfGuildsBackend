@@ -10,5 +10,5 @@ data class UserEntity(
     val id: String = "",
 
     @Column(name = "numberOfPoints")
-    val numberOfPoints: Int  = 0
+    var numberOfPoints: Int  = 0
 )
