@@ -7,22 +7,23 @@ import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 
 @RestController
+@RequestMapping("/points")
 class PointController (
     private val pointService: PointService
 ){
-    @GetMapping("points/getAll")
+    @GetMapping("/getAll")
     fun getPoints() : ResponseEntity<List<PointEntity>>{
         return ResponseEntity.ok(pointService.getAllPoints())
     }
 
-    @GetMapping("points/get/{pointId}")
+    @GetMapping("/get/{pointId}")
     fun getPoints(@PathVariable("pointId") pointId : String) : ResponseEntity<PointEntity?>{
         val foundPoint = pointService.getPointById(pointId)?:
             return ResponseEntity.notFound().build()
         return ResponseEntity.ok(foundPoint)
     }
 
-    @PutMapping("points/capture/{pointId}")
+    @PutMapping("/capture/{pointId}")
     fun capturePoint(@PathVariable("pointId") pointId : String, @RequestBody newOwner:UserEntity) : ResponseEntity<Boolean>{
         if(pointService.capturePoint(pointId, newOwner)){
             return ResponseEntity.ok().body(true)
@@ -30,7 +31,7 @@ class PointController (
         return ResponseEntity.notFound().build()
     }
 
-    @PostMapping("points/addNewPoint")
+    @PostMapping("/addNewPoint")
     fun addNewPoint(@RequestBody body:PointEntity) : ResponseEntity<PointEntity>{
         return ResponseEntity.ok().body(pointService.addPoint(body))
     }

@@ -5,6 +5,7 @@ import hu.bme.aut.backend.cityofguildsbackend.domain.UserEntity
 import hu.bme.aut.backend.cityofguildsbackend.repositories.IPointRepository
 import hu.bme.aut.backend.cityofguildsbackend.repositories.IUserRepository
 import hu.bme.aut.backend.cityofguildsbackend.services.IPointService
+import org.springframework.data.repository.findByIdOrNull
 import org.springframework.stereotype.Service
 import java.time.Duration
 import java.time.LocalDateTime
@@ -29,13 +30,15 @@ class PointService(
             val currentDateTime = LocalDateTime.now()
             val pointsGained = calculatePointEarned(currentPoint.captureDate, currentDateTime)
             currentPoint.captureDate = currentDateTime
-            //TODO check if this increases the points of the owner IT DOES!!!! no TODO here, just happpppyyyy
-            val owner = currentPoint.owner
+            val owner = userRepository.findByIdOrNull(newOwner.id)
+
+
             owner?.let{
                 owner.numberOfPoints += pointsGained
                 userRepository.save(it)
             }
             pointRepository.save(currentPoint)
+
             return true
         }
         return false
@@ -54,5 +57,5 @@ class PointService(
 
 fun calculatePointEarned( from: LocalDateTime, til : LocalDateTime): Int{
     val duration = Duration.between(from, til)
-    return duration.toHours().toInt()
+    return duration.toHours().toInt() + 1
 }
