@@ -1,6 +1,7 @@
 package hu.bme.aut.backend.cityofguildsbackend.services.impl
 
 import hu.bme.aut.backend.cityofguildsbackend.domain.UserEntity
+import hu.bme.aut.backend.cityofguildsbackend.repositories.IUserRepository
 import hu.bme.aut.backend.cityofguildsbackend.services.ILeaderboardService
 import hu.bme.aut.backend.cityofguildsbackend.services.IPointService
 import hu.bme.aut.backend.cityofguildsbackend.services.IUserService
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Service
 class LeaderboardService(
     private val pointService: IPointService,
     private val userService: IUserService,
+    private val userRepository: IUserRepository
 ) : ILeaderboardService {
     override fun updateLeaderboard() {
         val points = pointService.getAllPoints()
@@ -33,10 +35,6 @@ class LeaderboardService(
     }
 
     override fun getTopTen(): List<UserEntity> {
-        TODO("Not yet implemented")
-    }
-
-    override fun getTopX(howMany: Int): List<UserEntity> {
-        TODO("Not yet implemented")
+        return userRepository.findTop10ByOrderByNumberOfPointsDesc().map { it?.copy(password = "")?:UserEntity() }
     }
 }

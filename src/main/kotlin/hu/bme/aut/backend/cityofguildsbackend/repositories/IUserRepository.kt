@@ -8,4 +8,6 @@ import org.springframework.stereotype.Repository
 interface IUserRepository : JpaRepository<UserEntity, String>{
 
     fun findByEmail(email: String): UserEntity?
+
+    fun findTop10ByOrderByNumberOfPointsDesc(): List<UserEntity?>
 }

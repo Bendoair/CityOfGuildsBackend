@@ -2,6 +2,7 @@ package hu.bme.aut.backend.cityofguildsbackend.controllers
 
 import hu.bme.aut.backend.cityofguildsbackend.domain.PointEntity
 import hu.bme.aut.backend.cityofguildsbackend.domain.UserEntity
+import hu.bme.aut.backend.cityofguildsbackend.services.IPointService
 import hu.bme.aut.backend.cityofguildsbackend.services.impl.PointService
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
@@ -9,7 +10,7 @@ import org.springframework.web.bind.annotation.*
 @RestController
 @RequestMapping("/points")
 class PointController (
-    private val pointService: PointService
+    private val pointService: IPointService
 ){
     @GetMapping("/getAll")
     fun getPoints() : ResponseEntity<List<PointEntity>>{

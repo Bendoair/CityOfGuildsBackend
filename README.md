@@ -18,3 +18,4 @@ The app runs with Java 21.
 
 If you have any questions feel free to contact me any time. 
 The associated Android app can be found here: https://github.com/Bendoair/CityOfGuilds
+

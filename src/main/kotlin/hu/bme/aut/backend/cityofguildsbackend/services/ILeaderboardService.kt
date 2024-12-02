@@ -8,5 +8,4 @@ interface ILeaderboardService {
 
     fun updateLeaderboard()
     fun getTopTen() : List<UserEntity>
-    fun getTopX(howMany: Int) : List<UserEntity>
 }
