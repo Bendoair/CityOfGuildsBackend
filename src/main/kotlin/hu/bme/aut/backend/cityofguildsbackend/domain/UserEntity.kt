@@ -15,7 +15,7 @@ data class UserEntity(
     @Column(name ="isDeveloper")
     var isDeveloper: Boolean = false,
 
-    @Column(name = "email", unique = true, nullable = false)
+    @Column(name = "email",  nullable = false)
     val email: String = "",
 
     //Hashed Password
